@@ -1,0 +1,1 @@
+UPDATE Address SET Address.House_number=30, Address.Street="Test", Address.Neighbourhood="Test2", Address.City="no", Address.County="eine" WHERE Address.Address_id=Close_associate.Address_id FROM Close_associate, Address

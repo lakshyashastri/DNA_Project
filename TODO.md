@@ -5,4 +5,3 @@
 - Show address as well with data for tables with address_id? (either that full address in a separate table or joined in the same table?)
 - **DISPLAY ALL (OR SPECIFIC) TABLES**
 - choice handle simple space input
-  

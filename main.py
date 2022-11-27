@@ -3,7 +3,6 @@ import pymysql
 import pymysql.cursors
 from os import getenv
 
-from options import *
 from setup import *
 from helpers import display_options, dispatch
 
@@ -35,7 +34,7 @@ while (1):
     while (1):
         sp.call('clear', shell=True)
         display_options()
-
+        
         choice = int(input("\nEnter choice> "))
         dispatch(choice, con, cur)
         input("Press any key to continue> ")

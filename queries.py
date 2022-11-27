@@ -18,10 +18,10 @@ class Query:
         if not args:
             return (self.query, ())
 
-        if len(args) != self.argc:
-            print(f"Query needs exactly {self.argc} arguments, {len(args)} provided")
-            exit(0)
-        return (self.query, tuple(args))
+        # if len(args) != self.argc:
+        #     print(f"Query needs exactly {self.argc} arguments, {len(args)} provided")
+        #     exit(0)
+        return (self.query, tuple(args[-1 * self.argc:])) # a tuple kept getting accumulated here, so simply taking last n elements
 
 # All actual query data
 # Query data is of the form (QUERY, DESCRIPTION, (Attribute1, Attribute2, ...))
@@ -76,7 +76,7 @@ queries = [
         [
             ('UPDATE Adversary SET Status=%s WHERE Name=%s', "Update status of Adversary", ("New status", "Adversary name")),
             ('UPDATE Weapon SET Cost=%s WHERE Name=%s', "Update cost of weapon", ("Weapon cost", "Name")),
-            ('UPDATE Address SET Address.House_number=%s, Address.Street=%s, Address.Neighbourhood=%s, Address.City=%s, Address.County=%s WHERE Address.Address_id=Close_associate.Address_id FROM Close_associate, Address', "Update address of close associate", ("House number", "Street", "Neighbourhood", "City", "County"))
+            ('UPDATE Close_associate, Address SET Address.House_number=%s, Address.Street=%s, Address.Neighbourhood=%s, Address.City=%s, Address.County=%s WHERE Address.Address_id=Close_associate.Address_id AND Close_associate.name=%s', "Update address of close associate", ("House number", "Street", "Neighbourhood", "City", "County", "Name of close associate"))
         ],
 
         # deletion

@@ -31,30 +31,39 @@ def dispatch(choice, con, cur):
                 query.exec_args.append(int(inp) if inp.isdigit() else inp)
         
         # execute query
-        cur.execute(*query.format())
-        con.commit()
+        try:
+            if query.query.startswith("SELECT") and query.query.split("WHERE")[0].count(r"%s"): # format specifiers don't work with SELECT: check if they're used with SELECT
+                cur.execute(query.query.replace(r"%s", str(query.exec_args[0])))
+            else:
+                cur.execute(*query.format())
+                con.commit()
+        except Exception as e:
+            print(e)
+            return
 
         # get data
         columns = cur.description
         result = cur.fetchall()
-        SEP = f"======================="
-        SEP += "=" * ((len(columns) - 1) * 35)
+        if columns is not None:
+            SEP = f"======================="
+            SEP += "=" * ((len(columns) - 1) * 35)
 
-        # return if no results
-        if not result:
+        # return if no results if read query
+        if columns and not result:
             print("No results found")
             return
 
         # format and print column names
-        columns = [col[0] for col in columns]
-        print(SEP)
-        for col in columns:
-            print("{:<35}".format(str(col)), end = "")
-        print(f"\n{SEP}")
+        if columns is not None:
+            columns = [col[0] for col in columns]
+            print(SEP)
+            for col in columns:
+                print("{:<35}".format(str(col)), end = "")
+            print(f"\n{SEP}")
 
-        # print data
-        for data_tuple in result:
-            for data in data_tuple:
-                print("{:<35}".format(str(data)), end = "") # str(data) for NULL values
-            print()
-        print(f"{SEP}")
+            # print data
+            for data_tuple in result:
+                for data in data_tuple:
+                    print("{:<35}".format(str(data)), end = "") # str(data) for NULL values
+                print()
+            print(f"{SEP}")
