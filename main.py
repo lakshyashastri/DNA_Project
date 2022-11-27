@@ -29,6 +29,7 @@ while (1):
     input("Press any key to continue> ")
     cur = con.cursor()
     setup(con)
+    cur.execute("USE DNA_Project")
 
     # run
     while (1):
@@ -36,5 +37,5 @@ while (1):
         display_options()
 
         choice = int(input("\nEnter choice> "))
-        dispatch(choice)
+        dispatch(choice, con, cur)
         input("Press any key to continue> ")
