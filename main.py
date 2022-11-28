@@ -3,7 +3,6 @@ import pymysql
 import pymysql.cursors
 from os import getenv
 
-from setup import *
 from helpers import display_options, dispatch
 
 while (1):
@@ -27,7 +26,6 @@ while (1):
     # setup cursor
     input("Press any key to continue> ")
     cur = con.cursor()
-    setup(con)
     cur.execute("USE DNA_Project")
 
     # run
