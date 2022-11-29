@@ -39,6 +39,7 @@ def dispatch(choice, con, cur):
                 con.commit()
         except Exception as e:
             print(e)
+            con.rollback()
             return
 
         # get data

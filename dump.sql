@@ -35,7 +35,7 @@ USE `DNA_Project`;
 DROP TABLE IF EXISTS `Weapon`;
 CREATE TABLE `Weapon` (
   `Name` varchar(255) PRIMARY KEY,
-  `Type` varchar(255),
+  `Type` varchar(255) NOT NULL,
   `Cost` int
 );
 
@@ -60,8 +60,8 @@ DROP TABLE IF EXISTS `Weapon_customisation_set`;
 CREATE TABLE `Weapon_customisation_set` (
   `Weapon_name` varchar(255) PRIMARY KEY,
   `Tint` varchar(255),
-  `Clip_size` int,
-  `Clip_type` varchar(255)
+  `Clip_size` int NOT NULL,
+  `Clip_type` varchar(255) NOT NULL
 );
 
 
@@ -76,35 +76,35 @@ CREATE TABLE `Adversary_wield` (
 DROP TABLE IF EXISTS `Bulk_purchase`;
 CREATE TABLE `Bulk_purchase` (
   `Purchase_id` int PRIMARY KEY,
-  `Organisation_name` varchar(255),
-  `Weapon_name` varchar(255),
-  `Quantity` int
+  `Organisation_name` varchar(255) NOT NULL,
+  `Weapon_name` varchar(255) NOT NULL,
+  `Quantity` int NOT NULL
 );
 
 
 DROP TABLE IF EXISTS `Criminal_organisation`;
 CREATE TABLE `Criminal_organisation` (
   `Name` varchar(255) PRIMARY KEY,
-  `Boss` varchar(255),
-  `Member_count` int,
-  `Status` varchar(255)
+  `Boss` varchar(255) NOT NULL,
+  `Member_count` int NOT NULL,
+  `Status` varchar(255) NOT NULL
 );
 
 
 DROP TABLE IF EXISTS `Adversary`;
 CREATE TABLE `Adversary` (
   `Name` varchar(255) PRIMARY KEY,
-  `Status` varchar(255),
-  `Adversary_of` varchar(255)
+  `Status` varchar(255) NOT NULL,
+  `Adversary_of` varchar(255) 
 );
 
 
 DROP TABLE IF EXISTS `Event_involves`;
 CREATE TABLE `Event_involves` (
   `Associate_name` varchar(255),
-  `Event_number` int,
-  `Adversary_name` varchar(255),
-  `Organisation_name` varchar(255),
+  `Event_number` int ,
+  `Adversary_name` varchar(255) ,
+  `Organisation_name` varchar(255) ,
   PRIMARY KEY (`Associate_name`, `Event_number`, `Adversary_name`, `Organisation_name`)
 );
 
@@ -119,19 +119,19 @@ CREATE TABLE `Hires` (
 
 DROP TABLE IF EXISTS `Business`;
 CREATE TABLE `Business` (
-  `Name` varchar(255),
+  `Name` varchar(255) NOT NULL,
   `BAWSAQ_Index` varchar(4) PRIMARY KEY,
-  `Type` varchar(255),
-  `Valuation` int
+  `Type` varchar(255) NOT NULL,
+  `Valuation` int NOT NULL
 );
 
 
 DROP TABLE IF EXISTS `Vehicle`;
 CREATE TABLE `Vehicle` (
   `Model` varchar(255) PRIMARY KEY,
-  `Manafacturer` varchar(255),
-  `Max_speed` int,
-  `Vehicle_type` varchar(255)
+  `Manafacturer` varchar(255) NOT NULL,
+  `Max_speed` int NOT NULL,
+  `Vehicle_type` varchar(255) NOT NULL
 );
 
 
@@ -146,55 +146,55 @@ CREATE TABLE `Drive` (
 DROP TABLE IF EXISTS `Close_associate`;
 CREATE TABLE `Close_associate` (
   `Name` varchar(255) PRIMARY KEY,
-  `Year_of_birth` YEAR,
-  `Age` int,
-  `Address_id` int,
-  `Special_skill` varchar(255)
+  `Year_of_birth` YEAR NOT NULL,
+  `Age` int NOT NULL,
+  `Address_id` int NOT NULL,
+  `Special_skill` varchar(255) NOT NULL
 );
 
 
 DROP TABLE IF EXISTS `Collaborate_with`;
 CREATE TABLE `Collaborate_with` (
   `collaboration_id` int PRIMARY KEY,
-  `Associate1` varchar(255),
-  `Associate2` varchar(255),
-  `In_event` int
+  `Associate1` varchar(255) NOT NULL,
+  `Associate2` varchar(255) NOT NULL,
+  `In_event` int NOT NULL
 );
 
 
 DROP TABLE IF EXISTS `Consort`;
 CREATE TABLE `Consort` (
   `Name` varchar(255) PRIMARY KEY,
-  `Associate_name` varchar(255)
+  `Associate_name` varchar(255) NOT NULL
 );
 
 
 DROP TABLE IF EXISTS `Address`;
 CREATE TABLE `Address` (
   `Address_id` int PRIMARY KEY,
-  `House_number` int,
-  `Street` varchar(255),
-  `Neighbourhood` varchar(255),
-  `City` varchar(255),
-  `County` varchar(255)
+  `House_number` int NOT NULL,
+  `Street` varchar(255) NOT NULL,
+  `Neighbourhood` varchar(255) NOT NULL,
+  `City` varchar(255) NOT NULL,
+  `County` varchar(255) NOT NULL
 );
 
 
 DROP TABLE IF EXISTS `Landmark_event`;
 CREATE TABLE `Landmark_event` (
   `Serial_number` int PRIMARY KEY,
-  `Event_name` varchar(255),
-  `Consequential_outcome` varchar(255),
-  `Major_location` varchar(255)
+  `Event_name` varchar(255) NOT NULL,
+  `Consequential_outcome` varchar(255) NOT NULL,
+  `Major_location` varchar(255) NOT NULL
 );
 
 
 DROP TABLE IF EXISTS `Property`;
 CREATE TABLE `Property` (
   `Property_id` int PRIMARY KEY,
-  `Owner_name` varchar(255),
-  `Address_id` int,
-  `Valuation` int
+  `Owner_name` varchar(255) NOT NULL,
+  `Address_id` int NOT NULL,
+  `Valuation` int NOT NULL
 );
 
 -- LOCK TABLES `Weapon` WRITE;
